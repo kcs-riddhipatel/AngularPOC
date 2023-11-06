@@ -1,0 +1,50 @@
+<div class="form">
+    <div class="form__box">
+        <div class="form__left">
+            <div class="form__padding">
+                <img class="form__image" src="../../../../assets/images/login.jpg" alt="User" />
+            </div>
+        </div>
+        <div class="form__right">
+            <div class="form__padding-right">
+                <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+                    <h1 class="form__title">Welcome Back!</h1>
+                    <label for="Email">Email:</label>
+                    <input
+                        class="form__email"
+                        type="email"
+                        placeholder="abc@example.com"
+                        id="Email"
+                        [(ngModel)]="email"
+                        name="Email"
+                        required
+                        #emailInput="ngModel"
+                        email  
+                    />
+                    <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="text-danger">
+                        <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                        <div *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</div>
+                    </div>
+                    <label for="password">Password:</label>
+                    <input
+                        class="form__password"
+                        type="password"
+                        placeholder="******"
+                        id="password"
+                        [(ngModel)]="password"
+                        name="password"
+                        required
+                        minlength="6" 
+                    />
+                    <div *ngIf="loginForm.submitted && !password" class="text-danger">
+                        Password is required.
+                    </div>
+                    <div *ngIf="password && password.length < 6" class="text-danger">
+                        Password must be at least 6 characters long.
+                    </div>
+                    <input class="form__submit-btn" type="submit" value="Login" [disabled]="loginForm.invalid" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
